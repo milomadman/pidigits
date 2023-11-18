@@ -1,25 +1,63 @@
 span {
 color: "red";}
 
-body {background-color: rgb(40, 40,40);}
 
 label,p {color: rgb(200, 200, 200);}
 
 svg {
 	display: block;
 	background: transparent;	
+	max-width: 100%; /* Ensure the SVG does not exceed container width */
+	max-height: 100%;
+	width: 50%; /* Adjust the width of the SVG */
+	height: auto; /* Maintain aspect ratio */
+	z-index: 0; /* Ensure the SVG is behind the text */
 }
 
-.column {
-    float: left;
-    width: 50%;
-    padding: 5px;
-    height: 300px;}
-.row:after {
-    content: "";
-    display: table;
-    clear: both;}
+#iscorrect {
+	margin:0;
+	position: absolute;
+	top: 7%; /* Adjust top position of the text */
+	left: 50%; /* Adjust left position of the text */
+	transform: translate(-50%, -50%); /* Center the text */
+	z-index: 1; /* Place the text above the SVG */
+}
 
+button {
+	background-color: black;
+	color: white;
+}
+
+
+.column {
+    padding: 3%;
+    height: 100%;
+	box-sizing: border-box; 
+}
+
+.picrazyness {
+	width: 440px;
+}
+
+.PII {
+	flex: 1;
+	min-width: 100px;
+	overflow:hidden;
+	justify-content: center; /* Center the content horizontally */
+	display: flex;
+	position: relative;
+}
+
+
+
+#themdigits {
+	width:100%;
+}
+
+.row{
+    display: flex;
+	height: 400px;
+}
 
 .logo {
 	margin: 0;
@@ -29,22 +67,28 @@ svg {
 * {
 	box-sizing: border-box;
 }
+
+html {
+	height: auto; /* Reset explicit height if set */
+	margin: 0; /* Reset margins */
+	padding: 0; /* Reset paddings */
+}
+
 body {
+	background-color: rgb(40, 40,40);
 	font-family: 'Montserrat', sans-serif;
 	line-height: 1.6;
 	margin: 0;
-	min-height: 100vh;
+	height: 500px;
 }
+
 ul {
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-
-h2,
-h3,
-a {
+h2, h3, a {
 	color: #34495e;
 }
 
@@ -52,19 +96,12 @@ a {
 	text-decoration: none;
 }
 
-
-
-.logo {
-	margin: 0;
-	font-size: 1.45em;
-}
-
 .main-nav {
 	margin-top: 5px;
 
 }
-.logo a,
-.main-nav a {
+
+.logo a, .main-nav a {
 	padding: 10px 15px;
 	text-transform: uppercase;
 	text-align: center;
@@ -80,8 +117,6 @@ a {
 	color: #718daa;
 }
 
-
-
 .header {
 	padding-top: .5em;
 	padding-bottom: .5em;
@@ -95,10 +130,98 @@ a {
 	border-radius: 5px;
 }
 
+.leftright {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 3pt;
+	/* Add other styles as needed */
+}
+
+.rightside {
+	order:2;
+}  
 
 
 
+input {
+	height:16pt;
+	width:40px;
+	color: white;
+	background-color: black;
+	text-align: right;
+}
 
+#remaining {
+	margin-bottom:70px;
+}
+
+#dehelp {
+	margin:0;
+}
+
+#PIpath1 {
+	fill:#f5ed00;
+}
+
+#PIpath2{
+	fill:#f5ed00;
+}
+
+#digits {
+	width: 80%;
+	height: 20pt;
+	background-color: black;
+	color: white;
+}
+
+#starthelp-label {
+	text-decoration: underline;
+	margin-bottom: 10%;
+	text-align: center;
+	cursor: pointer;
+}
+
+#starthelp {
+	opacity:0;
+	pointer-events:none;
+}
+
+.myinput {
+	width:290px;
+	height: 40px;
+	font-size: 18pt;
+	position: relative;
+	left: 70px;
+	display: flex;
+  	align-items: center;
+	margin-top: 20%;
+}
+
+#entereddigit{
+	height: 50pt;
+	font-size: 40pt;
+	width: 10px;
+	flex: 1;
+}
+
+#advance {
+	font-size: 40pt;
+	width: 80px;
+	color: white;
+  	margin-right: 130px;
+}
+
+input[type="number"]#entereddigit + label {
+	/* Your CSS styles for the label here */
+	height: 50pt;
+	font-size: 40pt;
+	position: absolute;
+	/* Add other styles as needed */
+}
+
+#cheathelp {
+	margin:0;
+}
 
 @media (min-width: 769px) {
 	.header,
@@ -114,3 +237,11 @@ a {
 	}
 
 }
+
+/* Remove number input arrows */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none; /* Hide arrows on Chrome and Safari */
+  margin: 0; /* Fix for Firefox */
+}
+

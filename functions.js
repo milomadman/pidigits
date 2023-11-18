@@ -1,3 +1,14 @@
+document.addEventListener('DOMContentLoaded', function() {
+    const svg = document.getElementById('svg');
+    const g = document.getElementById('myGroup');
+    if (g) {
+      const bbox = g.getBBox();
+      svg.setAttribute('viewBox', `${bbox.x} ${bbox.y} ${bbox.width*1} ${bbox.height*1}`);
+    } else {
+      console.error("Element 'myGroup' not found.");
+    }
+});
+
 
 function check(){
     var pidigits = "14159265358979323846264338327950288419716939937510582097494459230781640628620899862803482534211706798214808651328230664709384460955058223172535940812848111745028410270193852110555964462294895493038196442881097566593344612847564823378678316527120190914564856692346034861045432664821339360726024914127372458700660631558817488152092096282925409171536436789259036001133053054882046652138414695194151160943305727036575959195309218611738193261179310511854807446237996274956735188575272489122793818301194912983367336244065664308602139494639522473719070217986094370277053921717629317675238467481846766940513200056812714526356082778577134275778960917363717872146844090122495343014654958537105079227968925892354201995611212902196086403441815981362977477130996051870721134999999837297804995105973173281609631859502445945534690830264252230825334468503526193118817101000313783875288658753320838142061717766914730359825349042875546873115956286388235378759375195778185778053217122680661300192787661119590921642019893809525720106548586327886593615338182796823030195203530185296899577362259941389124972177528347913151557485724245415069595082953311686172785588907509838175463746493931925506040092770167113900984882401285836160356370766010471018194295559619894676783744944825537977472684710404753464620804668425906949129331367702898915210475216205696602405803815" ;
@@ -11,15 +22,28 @@ function check(){
     var searched = pidigits.substring(s,end);
     var spacing = ""; if (n>100){spacing = "<br />"};
     var result = document.getElementById("result");
-
+    var PIcture = document.getElementById('PIpath1');
 
     if (x == searched){
-   
-        if (s == 0){
         correct.innerHTML = "";
-        result.innerHTML = "<span style='color:green'>"+ x + "</span>" + spacing +" are the correct first " + n + " digits of pi";}
-        else {
-            correct.innerHTML = "";
+        if (s == 0){
+            var e = x; var d=x;
+            var f = 0; 
+            while (d.length>=50){//if the digits are not too long, but we are not finished
+                d = x.substr(f+50,x.length);
+                e += x.substr(f,f+50)+ "</br>";
+                console.log(d);
+                f+=50;  
+            } 
+          
+            //PIcture.style.fill = 'none';
+            makeitdance();
+            /*setTimeout(function() {
+                PIcture.style.fill = '#f5ed00';
+            }, 3000);*/
+
+            result.innerHTML = "<span style='color:green'>"+ e + "</span>" + spacing +" are the correct first " + n + " digits of pi";
+        } else {
             result.innerHTML = "<span style='color:green'>"+ x + "</span>"   + spacing +" are the correct " + n + " digits of pi after " + s;}
     } 
 
@@ -50,7 +74,7 @@ function check(){
             }
         }
         if (booli){
-            result.innerHTML += ", you got the first " + won + " digits correct!"
+            result.innerHTML += ", you got the first " + won + " digits correct!";
         } else {
             result.innerHTML = "you left out digit number " + (leftout+1);
         }
@@ -60,10 +84,10 @@ function check(){
 }
 
 function updatenumber(){
-
     var x = document.getElementById("digits").value;
     var n = document.getElementById("number").value;
     var dignum = Array.from(x.toString()).length;
+
 
 
     if (x == ""){
@@ -73,35 +97,40 @@ function updatenumber(){
     } else {
         document.getElementById("remaining").innerHTML = n-dignum + " digits remaining";
         if (dignum==n){
-            document.getElementById("remaining").innerHTML = "right amount!"
+            document.getElementById("remaining").innerHTML = "right amount!";
         }
     }
 
     if (document.getElementById("starthelp").checked == 1){
         help();
     } else {
-        document.getElementById("dehelp").innerHTML = "";
+        document.getElementById("dehelp").innerHTML = "</br>";
     }
-
 }
 
 function help(){
-    var pidigits = "3.14159265358979323846264338327950288419716939937510582097494459230781640628620899862803482534211706798214808651328230664709384460955058223172535940812848111745028410270193852110555964462294895493038196442881097566593344612847564823378678316527120190914564856692346034861045432664821339360726024914127372458700660631558817488152092096282925409171536436789259036001133053054882046652138414695194151160943305727036575959195309218611738193261179310511854807446237996274956735188575272489122793818301194912983367336244065664308602139494639522473719070217986094370277053921717629317675238467481846766940513200056812714526356082778577134275778960917363717872146844090122495343014654958537105079227968925892354201995611212902196086403441815981362977477130996051870721134999999837297804995105973173281609631859502445945534690830264252230825334468503526193118817101000313783875288658753320838142061717766914730359825349042875546873115956286388235378759375195778185778053217122680661300192787661119590921642019893809525720106548586327886593615338182796823030195203530185296899577362259941389124972177528347913151557485724245415069595082953311686172785588907509838175463746493931925506040092770167113900984882401285836160356370766010471018194295559619894676783744944825537977472684710404753464620804668425906949129331367702898915210475216205696602405803815" ;
-    var chars = pidigits.split('');
-    var s = parseFloat(document.getElementById("start").value);
+    if (document.getElementById("starthelp").checked){
+        document.getElementById("starthelp-label").innerHTML="Hide preceding digits";
+        var pidigits = "3.14159265358979323846264338327950288419716939937510582097494459230781640628620899862803482534211706798214808651328230664709384460955058223172535940812848111745028410270193852110555964462294895493038196442881097566593344612847564823378678316527120190914564856692346034861045432664821339360726024914127372458700660631558817488152092096282925409171536436789259036001133053054882046652138414695194151160943305727036575959195309218611738193261179310511854807446237996274956735188575272489122793818301194912983367336244065664308602139494639522473719070217986094370277053921717629317675238467481846766940513200056812714526356082778577134275778960917363717872146844090122495343014654958537105079227968925892354201995611212902196086403441815981362977477130996051870721134999999837297804995105973173281609631859502445945534690830264252230825334468503526193118817101000313783875288658753320838142061717766914730359825349042875546873115956286388235378759375195778185778053217122680661300192787661119590921642019893809525720106548586327886593615338182796823030195203530185296899577362259941389124972177528347913151557485724245415069595082953311686172785588907509838175463746493931925506040092770167113900984882401285836160356370766010471018194295559619894676783744944825537977472684710404753464620804668425906949129331367702898915210475216205696602405803815" ;
+        var chars = pidigits.split('');
+        var s = parseFloat(document.getElementById("start").value);
 
-    var result = "";
-    if (s>=3){
-        for (let  i=-3; i<2; i++) {
-            result += chars[s+i];
+        var result = "";
+        if (s>=3){
+            for (let  i=-3; i<2; i++) {
+                result += chars[s+i];
+            }
+        } else {
+            if (s==2) {result = "3.14";}
+            else if (s==1) {result ="3.1";}
+            else if (s==0) {result="3.";}
         }
     } else {
-        if (s==2) {result = "3.14";}
-        else if (s==1) {result ="3.1";}
-        else if (s==0) {result="3.";}
+        result="</br>";
+        document.getElementById("starthelp-label").innerHTML="Show preceding digits";
     }
-    
     document.getElementById("dehelp").innerHTML = result;
+    
 }
 
 function restart(){
@@ -111,8 +140,9 @@ function restart(){
     document.getElementById("remaining").innerHTML="10 digits remaining";
     document.getElementById("result").innerHTML="";
     document.getElementById("correct").innerHTML="";
-    document.getElementById("dehelp").innerHTML="";
+    document.getElementById("dehelp").innerHTML="&nbsp";
     document.getElementById("starthelp").checked=false;
+    document.getElementById("starthelp-label").innerHTML="Show preceding digits";
 }
 
 function showpi(){
@@ -151,11 +181,14 @@ function showpi(){
 
 function restartinstant(){
     document.getElementById("entereddigit").value="";
-    document.getElementById("starting").value="0"
+    document.getElementById("starting").value="0";
+    document.getElementById("advance").innerHTML = "3.";
+    document.getElementById("iscorrect").innerHTML = "";
 }
 var counter = 0;
 
 function instantcheck(){
+    PIcture = document.getElementById("PIpath2");
     var m = 5; //to be changed to something that can be chosen
     document.getElementById("iscorrect").innerHTML = "";
     var pidigits = "14159265358979323846264338327950288419716939937510582097494459230781640628620899862803482534211706798214808651328230664709384460955058223172535940812848111745028410270193852110555964462294895493038196442881097566593344612847564823378678316527120190914564856692346034861045432664821339360726024914127372458700660631558817488152092096282925409171536436789259036001133053054882046652138414695194151160943305727036575959195309218611738193261179310511854807446237996274956735188575272489122793818301194912983367336244065664308602139494639522473719070217986094370277053921717629317675238467481846766940513200056812714526356082778577134275778960917363717872146844090122495343014654958537105079227968925892354201995611212902196086403441815981362977477130996051870721134999999837297804995105973173281609631859502445945534690830264252230825334468503526193118817101000313783875288658753320838142061717766914730359825349042875546873115956286388235378759375195778185778053217122680661300192787661119590921642019893809525720106548586327886593615338182796823030195203530185296899577362259941389124972177528347913151557485724245415069595082953311686172785588907509838175463746493931925506040092770167113900984882401285836160356370766010471018194295559619894676783744944825537977472684710404753464620804668425906949129331367702898915210475216205696602405803815" ;
@@ -169,16 +202,21 @@ function instantcheck(){
 
     } else if (s>4){
         for (let i=m;i>0;i--)
-        document.getElementById("advance").innerHTML = pidigits[Sn-i-4]+pidigits[Sn-i-3]+pidigits[Sn-i-2]+pidigits[Sn-i-1]+pidigits[Sn-i];
+        document.getElementById("advance").innerHTML = "..." + pidigits[Sn-i-4]+pidigits[Sn-i-3]+pidigits[Sn-i-2]+pidigits[Sn-i-1]+pidigits[Sn-i];
     } else {
         document.getElementById("advance").innerHTML = "3.";
     }
 
     if (x==pidigits[s]){
+        PIcture.style.fill='#15FF00';
         document.getElementById("iscorrect").innerHTML = "<span style='color:green'>correct</span>";
         document.getElementById("starting").value = Sn+1;
         counter=0;
+    } else if(x==""){
+        PIcture.style.fill='#f5ed00';
+        document.getElementById("iscorrect").innerHTML = "";
     } else {
+        PIcture.style.fill='#FF0000';
         document.getElementById("iscorrect").innerHTML = "<span style='color:red'> try again!</span>";
     }
 }
@@ -200,6 +238,35 @@ function showcheat(){
         let d = Number(s)+i
         document.getElementById("cheathelp").innerHTML+=pidigits[d]
     }
-
 }
 
+function makeitdance(){
+    var element = document.getElementById('PIpath1');
+    element.style.transformOrigin = '40px 40px';
+    animate(null, element); // Start the animation
+}
+
+function animate(timestamp, element) {
+    var start = null;
+    var duration = 3000; // 3 seconds
+  
+    function animateStep(timestamp) {
+      if (!start) start = timestamp;
+  
+      var progress = Math.min((timestamp - start) / duration, 1);
+  
+      // Apply rotation transformation based on progress
+      if (progress<0.5){
+        element.style.transform = 'rotate(' + (progress * 360) + 'deg) scale(' + (1 - progress) + ')';
+      } else {
+        element.style.transform = 'rotate(' + (progress * 360) + 'deg) scale(' + (progress) + ')';
+      }
+      
+  
+      if (progress < 1) {
+        requestAnimationFrame(animateStep);
+      }
+    }
+  
+    requestAnimationFrame(animateStep);
+}

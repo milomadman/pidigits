@@ -1,5 +1,4 @@
 <DOCTYPE html>
-    </html>
         <head>
             <title>Pi Website</title>
             <script src="functions.js"></script>
@@ -9,58 +8,66 @@
           <header class="header">
               <h1 class="logo"><a href="index.html">Learn Pi digits!</a></h1>
             <ul class="main-nav">
-              <li><a href="digits.html" >Digits</a></li>
+              <li><a href="index.html" style="background-color: rgb(198, 198, 198);">Test yourself</a></li>
+              <li><a href="instantmode.html" >Instant correction</a></li>
+              <li><a href="digits.html" >See Digits</a></li>
             </ul>
           </header>  
 
 
           <div class="row">
-            <div class="column" id="picrazyness">
-              <br>
-              
+            <div class="column picrazyness">             
               <!-- this is changing mode -->
-              <label for="mode">Do you want to change practice mode?</label>
-              <a href="instantmode.html"><button id="mode"> Instant correction</button></a><br><br>
 
-              <label for="number">How many digits do you want to practice?</label>
-              <input id ="number" type="number" min="1" max="1000" value="10"><br>
+              <div class="leftright">
+                <label for="number">How many digits do you want to practice?</label>
+                <input class="rightside" id ="number" type="number" min="1" max="1000" value="10">
+              </div>
+              
+              <div class="leftright">
+                <label id="startlabel" for="start">Starting from?</label>
+                <input class="rightside" id ="start" type="number" min="1" max="1000" value="0">
+              </div>
 
-              <label for="start">Starting from?</label>
-              <input id ="start" type="number" min="1" max="1000" value="0"><br><br>
+              <div class="leftright">
+                <label id="starthelp-label"for="starthelp">Show preceding digits</label>
+                <input class="rightside" id="starthelp" type="checkbox" onclick="help()"> 
+              </div>
 
-              <label for="starthelp">Do you want to have the digits before?</label>
-              <input id="starthelp" type="checkbox" onclick="help()"> <br>
-              <p id="dehelp"></p><br>
+              <div class="leftright">
+                <p id="dehelp">&nbsp</p>
+                <input class="rightside" id="digits" type="number" min="0">
+              </div>
 
-              <label for="digits"></label>
-              <input id="digits" type="number" min="0">
+              <div class="leftright">
+                <p></p>
+                <p class="rightside" id="remaining">10 digits remaining</p>
+              </div>
 
-              <p id="remaining">10 digits remaining</p>  
-              <br style="line-height:2;">
-
-              <button id ="myBtn" onclick="check()">check</button>
               <script> //makes enter press click
-                  var input = document.getElementById("digits");
-                  input.addEventListener("keypress", function(event) {
-                    if (event.key === "Enter") {
-                      event.preventDefault();
-                      document.getElementById("myBtn").click();
-                    }
-                  });
+                var input = document.getElementById("digits");
+                input.addEventListener("keypress", function(event) {
+                  if (event.key === "Enter") {
+                    event.preventDefault();
+                    document.getElementById("myBtn").click();
+                  }
+                });
               </script>
 
-              <button id="deletion" onclick="restart()">restart</button>
-              
+              <div class="leftright">
+                  <button id ="myBtn" onclick="check()">check</button>
+                  <button class="rightside" id="deletion" onclick="restart()">restart</button>
+              </div>
 
-              <p id="result"></p>
-              <p id="correct"></p>
+                <p id="result"></p>
+                <p id="correct"></p>
             </div>
 
           
-            <div class="column" id="PIcture">
+            <div class="column PII" id="PIcture1">
               <svg id="svg" viewBox="-30 -6 100 100" xmlns="http://www.w3.org/2000/svg">
-                <g transform="scale(1,1) translate(-25,-5)" >
-                  <path fill="#f5ed00" d="
+                <g id="myGroup" transform="scale(0.9)" >
+                  <path id="PIpath1" d="
                     M18,20 Q12,23,12,25 Q15,10,27,10 H70 V20 M60,20 L58,55 Q61,63,68,55 Q54,74,50,58 L52,20 M35,20 L33,65 H25 L27,20
                   "></path>
                 </g>

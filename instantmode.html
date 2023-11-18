@@ -5,47 +5,52 @@
             <script src="functions.js"></script>
             <link rel="stylesheet" href="style.css" type="text/css" />
         </head>
-        <body onkeyup="instantcheck()" onkeydown="cleanit()">
+        <body onkeyup="instantcheck()"  onkeydown="cleanit()">
           <header class="header">
               <h1 class="logo"><a href="index.html">Learn Pi digits!</a></h1>
             <ul class="main-nav">
-              <li><a href="digits.html" >Digits</a></li>
+              <li><a href="index.html" >Test yourself</a></li>
+              <li><a href="instantmode.html" style="background-color: rgb(198, 198, 198);">Instant correction</a></li>
+              <li><a href="digits.html" >See Digits</a></li>
             </ul>
           </header>  
 
-
           <div class="row">
-            <div class="column" id="picrazyness">
-              <br>
+            <div class="column picrazyness" >
+
+              <div class="leftright">
+                <label for="starting">Start at digit:</label>
+                <input class="rightside" id ="starting" type="number" min="1" max="1000" value="0">
+              </div>
+
+              <div class="leftright">
+                <button id="cheat" onclick="showcheat()">Cheat</button>
+                <p id="cheathelp"></p> 
+                <button class="rightside" id="deletion" onclick="restartinstant()">Restart</button>
+            </div>
+           
               
-              <!-- this is changing mode -->
-              <label for="mode">Do you want to change practice mode?</label>
-              <a href="index.html"><button id="mode">Test Modus</button></a><br><br>
 
-              <label for="starting">Starting digit?</label>
-              <input id ="starting" type="number" min="1" max="1000" value="0"><br><br>
+              <div  class="myinput">
+                <label for="entereddigit" id="advance">3.</label>
+                <input id="entereddigit" type="number" min="0">
+              </div>
+              
 
-
-              <label for="entereddigit" id="advance">3.</label>
-              <input id="entereddigit" type="number" min="0">
-
-              <button id="deletion" onclick="restartinstant()">restart</button> <br>
-
-              <p id="iscorrect"></p><br>
-              <button id="cheat" onclick="showcheat()">Cheat</button>
-              <p id="cheathelp"></p>
+              
             </div>
-
           
-            <div class="column" id="PIcture">
-              <svg id="svg" viewBox="-30 -6 100 100" xmlns="http://www.w3.org/2000/svg">
-                <g transform="scale(1,1) translate(-25,-5)" >
-                  <path fill="#f5ed00" d="
-                    M18,20 Q12,23,12,25 Q15,10,27,10 H70 V20 M60,20 L58,55 Q61,63,68,55 Q54,74,50,58 L52,20 M35,20 L33,65 H25 L27,20
-                  "></path>
-                </g>
-              </svg>
-            </div>
+          <div class="column PII" id="PIcture2">
+            <svg class="result" id="svg" viewBox="-30 -6 100 100" xmlns="http://www.w3.org/2000/svg">
+              <g id="myGroup" transform="scale(0.9)" >
+                <path id="PIpath2" d="
+                  M18,20 Q12,23,12,25 Q15,10,27,10 H70 V20 M60,20 L58,55 Q61,63,68,55 Q54,74,50,58 L52,20 M35,20 L33,65 H25 L27,20
+                "></path>
+              </g>
+            </svg>
+            <p class="result" id="iscorrect">&nbsp</p>
+            
+          </div>
           </div>
         </body>
     </html>
